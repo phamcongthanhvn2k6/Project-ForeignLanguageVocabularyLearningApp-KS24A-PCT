@@ -3,6 +3,16 @@ document.addEventListener("DOMContentLoaded", () => {
     renderHeaderAndBody();
 });
 
+function getFormData(formEL) {
+    let data = {};
+    for (element of formEL.elements) {
+        if (element.name !== "") {
+            data[element.name] = element.value;
+        }
+    }
+    return data;
+}
+
 // Chuyển hướng tới trang đăng nhập
 function redirectToFileSignIn() {
     window.location.href = "/authen/sign-in.html";
