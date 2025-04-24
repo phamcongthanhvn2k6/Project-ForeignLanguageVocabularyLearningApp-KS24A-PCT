@@ -1,0 +1,134 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #f8f8f8;
+}
+#logo {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 5%;
+}
+
+#authen {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 5%;
+    gap: 10px;
+}
+
+button#login {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button#Register {
+    background-color: #22C55E;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+body{
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 950px;
+    background-color: #d3d3d3c0;
+}
+
+#container{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 298px;
+    height: 634px;
+    background-color: #ffffff; /* Nền hộp đăng nhập */
+    border-radius: 8px; /* Góc bo tròn */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bóng */
+    padding: 20px;
+    }
+
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#sign-in{
+    box-sizing: border-box;
+    height: 42px;
+    background: #0D6EFD;
+    border: 1px solid #0D6EFD;
+    border-radius: 6px;
+}
+
+/* Input */
+input{
+width: 100%;
+height: 56px;
+background: #FFFFFF;
+border: 1px solid #DEE2E6;
+border-radius: 6px 6px 0px 0px;
+}
+
+#checkbox{
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+
+#p{
+    position: absolute;
+    bottom: 17%;
+    left: 40%;
+}
+
+form{
+    width: 100%;
+    height: auto;
+}
+
+#Input {
+    /* Div */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    width: 100%;
+    height: 74px;
+
+    mix-blend-mode: normal;
+    border-radius: 0px;
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+
+}
+
+footer{
+    background-color: #FFFFFF;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+

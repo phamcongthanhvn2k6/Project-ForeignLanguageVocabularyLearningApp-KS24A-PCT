@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="sign-in.css">
+    <!-- Firebase SDKs -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js"></script>
+</head>
+
+<body>
+    <header>
+        <div id="logo">
+            <h1>VocabApp</h1>
+        </div>
+    
+        <div id="authen">
+            <button onclick="redirectToFileSignIn()" id="login">Login</button>
+            <button onclick="redirectToFileSignUp()" id="Register">Register</button>
+        </div>
+    </header>
+    <div id="container">
+        <h1>Login</h1>
+        <form onsubmit="login(event)">
+            <div id="Input">
+                <label>Email</label>
+                <input name="email" type="email" placeholder="Email Address" required>
+            </div>
+
+            <div id="Input">
+                <label>Password</label>
+                <input name="password" type="password" placeholder="Password" required>
+            </div>
+            <div id="checkbox">
+                <input type="checkbox" name="remember">
+                <p>Remember Me</p>
+            </div>
+            <p>Don't have an account? <a href="../authen/sign-up.html">Click Here!</a></p>
+            <button type="submit" id="sign-in">Sign In</button>
+        </form>
+    </div>
+
+    <script src="/home/main.js"></script>
+    <script src="main.js"></script>
+
+
+</body>
+
+<footer>
+    <p>© 2024 VocabApp. All rights reserved.</p>
+</footer>
+
+</html>

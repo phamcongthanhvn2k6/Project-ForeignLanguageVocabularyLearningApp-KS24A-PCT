@@ -1,0 +1,118 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 5%;
+    background-color: #f8f8f8;
+    
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #481717c0;
+}
+
+button#getStartedButton {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button#CreateAccountButton {
+    background-color: #22C55E;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#textCenter {
+    text-align: center;
+    justify-content: center;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 30%;
+    background-color: #ffffff;
+    /* Nền hộp đăng nhập */
+    border-radius: 8px;
+    /* Góc bo tròn */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Bóng */
+    padding: 20px;
+}
+
+footer {
+    background-color: #FFFFFF;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#headerUser {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+
+#userName{
+    width: 50%;
+    display: flex;
+}
+
+#buttonUser{
+    display: flex;   
+}
+#logout {
+    margin-right: 5%;
+    background-color: #c71535;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#adminButton{
+    background-color: #22C55E;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#buttonQuiz{
+    margin: auto;
+    width: 30%;
+    background-color: #22C55E;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#contentCenter{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+}

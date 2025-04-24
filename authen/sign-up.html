@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="sign-up.css">
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <h1>VocabApp</h1>
+        </div>
+    
+        <div id="authen">
+            <button onclick="redirectToFileSignIn()" id="login">Login</button>
+            <button onclick="redirectToFileSignUp()" id="Register">Register</button>
+        </div>
+    </header>
+    <div id="container">
+        <h1>Register</h1>
+        <form onsubmit="register(event)">
+            <div id="Input">
+                <label>First Name</label>
+                <input name="firstName" type="text" placeholder="First Name">
+            </div>
+            <div id="Input">
+                <label>Last Name</label>
+                <input name="lastName" type="text" placeholder="Last Name">
+            </div>
+
+            <div id="Input">
+                <label>Email</label>
+                <input name="email" type="email" placeholder="Email Address">
+            </div>
+
+            <div id="Input"> 
+                <label>Password</label>
+                <input name="password" type="password" placeholder="Password">       
+            </div>
+
+            <div id="Input">
+                <label>Confirm Passwoed</label>
+                <input name="confirmPassword" type="password" placeholder="Confirm Password">
+            </div>    
+            <p>Already have an account, <a href="../authen/sign-in.html">Click Here!</a></p>
+            <button id="sign-in">Sign In</button>
+        </form>
+    </div>
+    <script src="/home/main.js"></script>
+    <script src="main.js"></script>
+</body>
+
+<footer>
+    <p>© 2024 VocabApp. All rights reserved.</p>
+</footer>
+</html>

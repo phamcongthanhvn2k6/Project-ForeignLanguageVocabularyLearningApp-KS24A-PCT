@@ -1,0 +1,141 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #d3d3d3c0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    /* Ensures logo and authen are spaced apart */
+    align-items: center;
+    /* Vertically centers logo and authen */
+    width: 100%;
+    /* Makes the header span the full width */
+    padding: 0 5%;
+    /* Adds padding to keep the content from hugging the edges */
+    background-color: #f8f8f8;
+    /* Optional: Header background */
+}
+
+#logo {
+    flex: 1;
+    /* Allows the logo section to take up space proportionately */
+    display: flex;
+    justify-content: flex-start;
+    /* Aligns the logo to the left */
+    margin-left: 5%;
+    /* Adjusts spacing */
+}
+
+#authen {
+    flex: 1;
+    /* Allows the authentication section to take up space proportionately */
+    display: flex;
+    justify-content: flex-end;
+    /* Aligns the buttons to the right */
+    margin-right: 5%;
+    /* Adjusts spacing */
+    gap: 10px;
+    /* Adds spacing between Login and Register buttons */
+}
+
+button#login {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button#Register {
+    background-color: #22C55E;
+
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#container {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 298px;
+    height: 441px;
+    background-color: #ffffff;
+    /* Nền hộp đăng nhập */
+    border-radius: 8px;
+    /* Góc bo tròn */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Bóng */
+    padding: 20px;
+}
+
+#sign-in {
+    width: 100%;
+    box-sizing: border-box;
+    height: 42px;
+    background: #0D6EFD;
+    border: 1px solid #0D6EFD;
+    border-radius: 6px;
+}
+
+/* Input */
+input {
+    width: 100%;
+    height: 56px;
+    background: #FFFFFF;
+    border: 1px solid #DEE2E6;
+    border-radius: 6px 6px 0px 0px;
+}
+
+#checkbox {
+    width: 60px;
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+
+
+form {
+    width: 100%;
+}
+
+#Input {
+    /* Div */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    width: 100%;
+    height: 74px;
+
+    mix-blend-mode: normal;
+    border-radius: 0px;
+
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+
+}
+
+footer{
+    background-color: #FFFFFF;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
