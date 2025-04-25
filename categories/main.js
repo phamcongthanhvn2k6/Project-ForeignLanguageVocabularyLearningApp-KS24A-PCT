@@ -39,22 +39,24 @@ function addCategories(event) {
 }
 
 function renderData() {
-    const table = document.querySelector("#data");
-    table.innerHTML = "";
-
-    categoriesList.forEach((cate, index) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${cate.name}</td>
-            <td>${cate.description}</td>
+    const categoriesData = document.querySelector('#data');
+    let dataHTML = "";
+    for (let i = 0; i < categoriesList.length; i++) {
+        dataHTML += `
+        <tr>
+            <td>${categoriesList[i].name}</td>
+            <td>${categoriesList[i].description}</td>
             <td>
-                <button id="addNewBtn" onclick="LoadCategory(${index})">Sửa</button>
-                <button id="logout" onclick="deleteCategory(${index})">Xóa</button>
+                <button id="logout" onclick="LoadCategory(${i})">Sửa</button>
+                <button id="addNewBtn" onclick="deleteCategory(${i})">Xóa</button>
             </td>
+        </tr>
         `;
-        table.appendChild(row);
-    });
+    }
+    categoriesData.innerHTML = dataHTML;
 }
+
+
 
 function deleteCategory(index) {
     if (confirm("Bạn có chắc muốn xóa danh mục này không?")) {

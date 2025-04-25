@@ -90,8 +90,11 @@ function renderHeaderAndBody() {
 
 // Hàm đăng xuất
 function logout() {
-    localStorage.removeItem("userLogin"); // Xóa thông tin đăng nhập
-    window.location.href = "/home/index.html"; // Chuyển hướng về trang chủ
+    if(confirm("Bạn Có Muốn Đăng Xuất Không?")){
+        localStorage.removeItem("userLogin"); // Xóa thông tin đăng nhập
+        alert("Đã Đăng Xuất Thành Công")
+        redirectToFileSignIn();
+        }
 }
 
 // Kiểm tra định dạng email hợp lệ
