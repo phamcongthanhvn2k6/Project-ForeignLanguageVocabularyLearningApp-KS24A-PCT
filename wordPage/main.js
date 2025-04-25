@@ -1,5 +1,6 @@
 let vocabularyList = [];
 let categoriesList = [];
+let deleteIndex = -1;
 
 if (!localStorage.getItem("categoriesList")) {
     categoriesList = ["Noun", "Verb", "Adjective"];
@@ -28,19 +29,19 @@ function getFormData(formEL) {
     return data;
 }
 
-function renderData(danhSach = vocabularyList ) {
+function renderData(danhSach = vocabularyList) {
     const vocabularyData = document.querySelector('#data');
     let dataHTML = "";
 
-    for (let i = 0; i < vocabularyList.length; i++) {
+    for (let i = 0; i < danhSach.length; i++) {
         dataHTML += `
         <tr>
             <td>${danhSach[i].word}</td>
             <td>${danhSach[i].meaning}</td>
             <td>${danhSach[i].categorySelect}</td>
             <td>
-                <button onclick="LoadCategory(${i})">Sửa</button>
-                <button onclick="deleteVocabularyData(${i})">Xóa</button>
+                <button class="btn btn-sm btn-primary" onclick="LoadCategory(${i})">Sửa</button>
+                <button class="btn btn-sm btn-danger" onclick="showDeleteModal(${i})">Xóa</button>
             </td>
         </tr>
         `;
@@ -48,17 +49,28 @@ function renderData(danhSach = vocabularyList ) {
     vocabularyData.innerHTML = dataHTML;
     populateCategories();
 }
-renderData();
 
-function deleteVocabularyData(index) {
-    if (confirm("Bạn có chắc muốn xóa từ này không?")) {
-        vocabularyList.splice(index, 1);
+function showDeleteModal(index) {
+    deleteIndex = index;
+    document.getElementById("deleteModal").classList.remove("hidden");
+}
+
+function closeDeleteModal() {
+    document.getElementById("deleteModal").classList.add("hidden");
+    deleteIndex = -1;
+}
+
+function confirmDelete() {
+    if (deleteIndex >= 0) {
+        vocabularyList.splice(deleteIndex, 1);
         SaveDataToLocal();
         renderData();
+        closeDeleteModal();
     }
 }
 
 function showModal() {
+    populateCategories();
     document.getElementById("wordModal").classList.remove("hidden");
 }
 
@@ -67,13 +79,14 @@ function LoadCategory(index) {
     document.querySelector("[name='editIndex']").value = index;
     document.querySelector("[name='word']").value = voca.word;
     document.querySelector("[name='meaning']").value = voca.meaning;
-    document.querySelector("[name='categorySelect']").value = voca.categorySelect;
-
-    document.getElementById("wordModal").classList.remove("hidden");
+    document.querySelector("#wordModal [name='categorySelect']").value = voca.categorySelect;
+    showModal();
 }
 
 function closeEditModal() {
     document.getElementById("wordModal").classList.add("hidden");
+    document.querySelector("#editForm").reset();
+    document.querySelector("[name='editIndex']").value = "";
 }
 
 function handleSubmitVocabulary(event) {
@@ -118,9 +131,7 @@ function handleSubmitVocabulary(event) {
     SaveDataToLocal();
     renderData();
     form.reset();
-    form.editIndex.value = "";
-
-    document.getElementById("wordModal").classList.add("hidden");
+    closeEditModal();
 }
 
 function populateCategories() {
@@ -138,19 +149,22 @@ function populateCategories() {
 
 populateCategories();
 
-function showModal() {
-    populateCategories();
-    document.getElementById("wordModal").classList.remove("hidden");
-}
-
 function searchProduct() {
-    let contentSearch = document.querySelector('#ip_search').value.toLowerCase()
+    const searchTerm = document.querySelector('#ip_search').value.toLowerCase();
+    const selectedCategory = document.querySelector("select[name='categorySelect']").value;
 
-    let arrayResult = []
-    for(let i = 0; i < vocabularyList.length; i++) {
-        if(vocabularyList[i].word.toLowerCase().includes(contentSearch.toLowerCase())) {
-            arrayResult.push(vocabularyList[i])
-        }
-    }
-    renderData(arrayResult)
+    let filteredList = vocabularyList.filter(voca => {
+        const matchesWord = voca.word.toLowerCase().includes(searchTerm);
+        const matchesCategory = !selectedCategory || voca.categorySelect === selectedCategory;
+        return matchesWord && matchesCategory;
+    });
+
+    renderData(filteredList);
 }
+
+function filterByCategory(category) {
+    searchProduct();
+}
+
+renderData();
+populateCategories();

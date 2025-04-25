@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,7 +9,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
     <div id="box">
         <h1>Vocabulary Words</h1>
@@ -19,13 +17,14 @@
 
     <div class="form-group mb-3">
         <label for="categorySelect">Category</label>
-        <select name="categorySelect" class="form-control" required>
+        <select name="categorySelect" class="form-control" onchange="filterByCategory(this.value)">
+            <option value="">All Categories</option>
             <!-- Options will be added dynamically in JS -->
         </select>
     </div>
 
-    <input  id="ip_search" type="text" placeholder="Search vocabulary...">
-    
+    <input id="ip_search" type="text" placeholder="Search vocabulary..." oninput="searchProduct()">
+
     <div id="textCenter">
         <div id="box">
             <h1>Vocabulary List</h1>
@@ -51,10 +50,10 @@
         <p>© 2024 VocabApp. All rights reserved.</p>
     </footer>
 
-    <!-- Modal -->
+    <!-- Add/Edit Word Modal -->
     <div id="wordModal" class="custom-modal hidden">
         <div class="custom-modal-content">
-            <span class="custom-close" onclick="closeEditModal()">&times;</span>
+            <span class="custom-close" onclick="closeEditModal()">×</span>
             <h2>Thêm / Sửa Từ Vựng</h2>
             <form id="editForm" onsubmit="handleSubmitVocabulary(event)">
                 <input type="hidden" name="editIndex" />
@@ -84,7 +83,19 @@
         </div>
     </div>
 
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="custom-modal hidden">
+        <div class="custom-modal-content">
+            <span class="custom-close" onclick="closeDeleteModal()">×</span>
+            <h2>Xác nhận xóa</h2>
+            <p>Bạn có chắc muốn xóa từ vựng này không?</p>
+            <div class="form-actions d-flex justify-content-between">
+                <button type="button" class="btn btn-secondary" onclick="closeDeleteModal()">Hủy</button>
+                <button type="button" class="btn btn-danger" onclick="confirmDelete()">Xóa</button>
+            </div>
+        </div>
+    </div>
+
     <script src="main.js"></script>
 </body>
-
 </html>
