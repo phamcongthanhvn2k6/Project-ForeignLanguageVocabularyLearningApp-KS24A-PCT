@@ -38,32 +38,22 @@ function addCategories(event) {
     formAddEL.reset();
 }
 
-function renderData() {
+function renderData(danhSach = categoriesList) {
     const categoriesData = document.querySelector('#data');
     let dataHTML = "";
-    for (let i = 0; i < categoriesList.length; i++) {
+    for (let i = 0; i < danhSach.length; i++) { // Sử dụng danhSach thay vì categoriesList
         dataHTML += `
         <tr>
-            <td>${categoriesList[i].name}</td>
-            <td>${categoriesList[i].description}</td>
+            <td>${danhSach[i].name}</td>
+            <td>${danhSach[i].description}</td>
             <td>
-                <button id="logout" onclick="LoadCategory(${i})">Sửa</button>
-                <button id="addNewBtn" onclick="deleteCategory(${i})">Xóa</button>
+                <button id="addNewBtn" onclick="LoadCategory(${i})">Sửa</button>
+                <button id="logout" onclick="showDeleteModal(${i})">Xóa</button>
             </td>
         </tr>
         `;
     }
     categoriesData.innerHTML = dataHTML;
-}
-
-
-
-function deleteCategory(index) {
-    if (confirm("Bạn có chắc muốn xóa danh mục này không?")) {
-        categoriesList.splice(index, 1);
-        SaveDataToLocal();
-        renderData();
-    }
 }
 
 function LoadCategory(index) {
@@ -107,3 +97,35 @@ function saveEdit(event) {
 }
 
 renderData();
+
+function showDeleteModal(index) {
+    deleteIndex = index;
+    document.getElementById("deleteModal").style.display = "block";
+}
+
+function closeDeleteModal() {
+    document.getElementById("deleteModal").style.display = "none";
+    deleteIndex = -1;
+}
+
+function confirmDelete() {
+    if (deleteIndex >= 0) {
+        categoriesList.splice(deleteIndex, 1);
+        SaveDataToLocal();
+        renderData();
+        closeDeleteModal();
+    }
+}
+
+function searchCategories() {
+    const searchTerm = document.getElementById("ip_search").value.toLowerCase();
+    console.log("Từ khóa tìm kiếm:", searchTerm);
+
+    const filteredList = categoriesList.filter(category => 
+        category.name.toLowerCase().includes(searchTerm) || 
+        category.description.toLowerCase().includes(searchTerm)
+    );
+    console.log("Danh sách đã lọc:", filteredList);
+
+    renderData(filteredList);
+}

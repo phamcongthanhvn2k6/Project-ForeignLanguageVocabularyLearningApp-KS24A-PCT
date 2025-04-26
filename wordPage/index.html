@@ -15,13 +15,11 @@
         <button class="btn btn-primary" onclick="showModal()">Thêm từ mới</button>
     </div>
 
-    <div class="form-group mb-3">
-        <label for="categorySelect">Category</label>
-        <select name="categorySelect" class="form-control" onchange="filterByCategory(this.value)">
-            <option value="">All Categories</option>
-            <!-- Options will be added dynamically in JS -->
-        </select>
-    </div>
+        <div id="filter">
+            <select name="categorySelect" class="form-control" onchange="filterByCategory(this.value)">
+                <option value="">All Categories</option>
+            </select>
+        </div>
 
     <input id="ip_search" type="text" placeholder="Search vocabulary..." oninput="searchProduct()">
 
@@ -46,9 +44,7 @@
         </div>
     </div>
 
-    <footer>
-        <p>© 2024 VocabApp. All rights reserved.</p>
-    </footer>
+    
 
     <!-- Add/Edit Word Modal -->
     <div id="wordModal" class="custom-modal hidden">
@@ -95,7 +91,9 @@
             </div>
         </div>
     </div>
-
+    <footer>
+        <p>© 2024 VocabApp. All rights reserved.</p>
+    </footer>
     <script src="main.js"></script>
 </body>
 </html>

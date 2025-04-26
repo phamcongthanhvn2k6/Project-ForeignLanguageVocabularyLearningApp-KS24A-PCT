@@ -135,16 +135,31 @@ function handleSubmitVocabulary(event) {
 }
 
 function populateCategories() {
-    const select = document.querySelector("#wordModal select[name='categorySelect']");
-    if (!select) {
-        console.error("Không tìm thấy phần tử select.");
+    const selects = document.querySelectorAll('select[name="categorySelect"]');
+    if (!selects.length) {
+        console.error("Không tìm thấy phần tử select nào.");
         return;
     }
-    let DataHTML = "";
-    for(let i=0; i<categoriesList.length; i++){
-        DataHTML += `<option value="${categoriesList[i].name}">${categoriesList[i].name}</option>`;
-    }
-    select.innerHTML = DataHTML;
+
+    // Lặp qua từng thẻ select và thêm các tùy chọn
+    selects.forEach(select => {
+        // Xóa nội dung cũ
+        select.innerHTML = "";
+
+        // Thêm tùy chọn "All Categories" nếu cần
+        const allOption = document.createElement("option");
+        allOption.value = ""; // Giá trị rỗng để đại diện cho "All Categories"
+        allOption.textContent = "All Categories";
+        select.appendChild(allOption);
+
+        // Thêm các danh mục từ categoriesList
+        categoriesList.forEach(category => {
+            const option = document.createElement("option");
+            option.value = category.name; // Đặt giá trị chính xác cho tùy chọn
+            option.textContent = category.name; // Hiển thị tên danh mục
+            select.appendChild(option);
+        });
+    });
 }
 
 populateCategories();
@@ -166,5 +181,7 @@ function filterByCategory(category) {
     searchProduct();
 }
 
-renderData();
-populateCategories();
+window.onload = function () {
+    populateCategories();
+    renderData();
+};

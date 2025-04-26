@@ -29,6 +29,9 @@
         <div id="box">
             <h1>Vocabulary Categories</h1>
         </div>
+
+        <input id="ip_search" type="text" placeholder="Search Categories..." oninput="searchCategories()">
+
         <form onsubmit="addCategories(event)" class="mb-3">
             <div class="row g-2">
                 <div class="col-md-5">
@@ -82,6 +85,18 @@
                     <button type="submit">Lưu thay đổi</button>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <div id="deleteModal" class="custom-modal hidden">
+        <div class="custom-modal-content">
+            <span class="custom-close" onclick="closeDeleteModal()">×</span>
+            <h2>Xác nhận xóa</h2>
+            <p>Bạn có chắc muốn xóa từ vựng này không?</p>
+            <div class="form-actions d-flex justify-content-between">
+                <button type="button" class="btn btn-secondary" onclick="closeDeleteModal()">Hủy</button>
+                <button type="button" class="btn btn-danger" onclick="confirmDelete()">Xóa</button>
+            </div>
         </div>
     </div>
 
