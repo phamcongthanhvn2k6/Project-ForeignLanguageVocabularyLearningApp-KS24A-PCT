@@ -12,36 +12,6 @@ function SaveDataToLocal() {
     localStorage.setItem("categoriesList", JSON.stringify(categoriesList));
 }
 
-function addCategories(event) {
-    event.preventDefault();
-    if (!confirm("Bạn Có Muốn Thêm Danh Mục Mới Không?")) return;
-
-    let formAddEL = event.target;
-    let Data = getFormData(formAddEL);
-
-    if (!Data.name || !Data.name.trim()) {
-        alert("Danh Mục Không Được Để Trống!");
-        return;
-    }
-
-    if (categoriesList.find((cateEL) => cateEL.name === Data.name)) {
-        alert("Danh Mục Đã Tồn Tại");
-        return;
-    }
-
-    const categoriesData = {
-        name: Data.name,
-        description: Data.description || "Không có mô tả"
-    };
-
-    categoriesList.push(categoriesData);
-    SaveDataToLocal();
-    updateCountPage(); // Cập nhật số trang
-    renderData();
-    renderPagin();
-    formAddEL.reset();
-}
-
 const urlParams = new URLSearchParams(window.location.search);
 let curPage = parseInt(urlParams.get('page')) || 1; // Lấy trang hiện tại từ URL, mặc định là 1
 const maxItem = 5; // Số mục trên mỗi trang
@@ -113,47 +83,78 @@ renderPagin();
 
 function LoadCategory(index) {
     const cate = categoriesList[index];
-    document.getElementById("editIndex").value = index;
-    document.getElementById("editName").value = cate.name;
-    document.getElementById("editDescription").value = cate.description;
+    document.getElementById("editIndex").value = index; // Đặt index để chỉnh sửa
+    document.getElementById("editName").value = cate.name; // Đặt tên danh mục
+    document.getElementById("editDescription").value = cate.description; // Đặt mô tả danh mục
 
-    document.getElementById("editModal").style.display = "block";
+    openModal(); // Mở modal chỉnh sửa
 }
 
 function closeEditModal() {
-    document.getElementById("editModal").style.display = "none";
+    document.getElementById("Modal").style.display = "none";
 }
 
-function saveEdit(event) {
+function handleCategory(event) {
     event.preventDefault();
+    const form = event.target;
+    const data = getFormData(form);
 
-    const index = document.getElementById("editIndex").value;
-    const newName = document.getElementById("editName").value.trim();
-    const newDesc = document.getElementById("editDescription").value.trim();
+    console.log("Form Data:", data);
+    console.log("Categories List:", categoriesList);
 
-    if (!newName) {
-        alert("Tên danh mục không được để trống.");
+    if (!data.name || !data.name.trim()) {
+        alert("Name không được để trống!");
+        return;
+    }
+    if (!data.description || !data.description.trim()) {
+        alert("Description không được để trống!");
         return;
     }
 
-    if (categoriesList.some((cate, i) => cate.name === newName && i != index)) {
-        alert("Tên danh mục đã tồn tại.");
+    const newName = data.name.trim();
+    const index = data.editIndex !== "" ? parseInt(data.editIndex) : -1;
+
+    // Kiểm tra trùng lặp
+    const isDuplicate = categoriesList.some((cate, i) => cate.name === newName && i !== index);
+    if (isDuplicate) {
+        alert("Danh Mục này đã tồn tại!");
         return;
     }
 
-    categoriesList[index] = {
+    const newCategories = {
         name: newName,
-        description: newDesc || "Không có mô tả"
+        description: data.description.trim(),
     };
 
+    if (index >= 0) {
+        // Chỉnh sửa danh mục
+        categoriesList[index] = newCategories;
+        alert("Chỉnh sửa danh mục thành công!");
+    } else {
+        // Thêm mới danh mục
+        categoriesList.push(newCategories);
+        alert("Thêm danh mục thành công!");
+    }
+
     SaveDataToLocal();
+    updateCountPage(); // Cập nhật số trang
     renderData();
-    closeEditModal();
+    renderPagin();
+    closeAddModal(); // Đóng modal sau khi xử lý
+    form.reset(); // Đặt lại form sau khi xử lý
 }
 
 function showDeleteModal(index) {
     deleteIndex = index;
     document.getElementById("deleteModal").style.display = "block";
+}
+
+function openModal() {
+    document.getElementById("Modal").style.display = "block";
+}
+
+function closeAddModal() {
+    document.getElementById("Modal").style.display = "none";
 }
 
 function closeDeleteModal() {
@@ -219,4 +220,11 @@ function changePage(page) {
 
 function updateCountPage() {
     countPage = Math.ceil(categoriesList.length / maxItem);
+}
+
+function openAddModal() {
+    document.getElementById("editIndex").value = ""; // Đặt index rỗng để thêm mới
+    document.getElementById("editName").value = ""; // Xóa giá trị cũ
+    document.getElementById("editDescription").value = ""; // Xóa giá trị cũ
+    document.getElementById("addModal").style.display = "block";
 }

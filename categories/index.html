@@ -26,25 +26,14 @@
     </header>
 
     <div id="textCenter">
+
         <div id="box">
             <h1>Vocabulary Categories</h1>
+            <button  onclick="openModal()" id="addNewBtn">Thêm Danh Mục</button>
         </div>
 
-        <input id="ip_search" type="text" placeholder="Search Categories..." oninput="searchCategories()">
-
-        <form onsubmit="addCategories(event)" class="mb-3">
-            <div class="row g-2">
-                <div class="col-md-5">
-                    <input name="name" type="text" class="form-control" placeholder="Tên danh mục..." required />
-                </div>
-                <div class="col-md-5">
-                    <input name="description" type="text" class="form-control" placeholder="Mô tả danh mục..." />
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-success w-100">Thêm</button>
-                </div>
-            </div>
-        </form>
+        <input id="ip_search" type="text" placeholder="Search Categories..." oninput="searchCategories()">    
+        
 
         <div id="table">
             <table>
@@ -70,22 +59,22 @@
         <p>© 2024 VocabApp. All rights reserved.</p>
     </footer>
 
-    <div id="editModal" class="custom-modal">
+    <div id="Modal" class="custom-modal">
         <div class="custom-modal-content">
             <span class="custom-close" onclick="closeEditModal()">&times;</span>
             <h2>Chỉnh sửa danh mục</h2>
-            <form id="editForm" onsubmit="saveEdit(event)">
-                <input type="hidden" id="editIndex">
+            <form id="editForm" onsubmit="handleCategory(event)">
+                <input type="hidden" name="editIndex" id="editIndex" value="" />
                 <div class="form-group">
                     <label for="editName">Tên danh mục</label>
-                    <input type="text" id="editName" required>
+                    <input type="text" name="name" id="editName" required />
                 </div>
                 <div class="form-group">
                     <label for="editDescription">Mô tả</label>
-                    <input type="text" id="editDescription">
+                    <input type="text" name="description" id="editDescription" />
                 </div>
                 <div class="form-actions">
-                    <button type="button" onclick="closeEditModal()">Hủy</button>
+                    <button type="button" onclick="closeAddModal()">Hủy</button>
                     <button type="submit">Lưu thay đổi</button>
                 </div>
             </form>
