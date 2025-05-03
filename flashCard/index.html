@@ -11,28 +11,64 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div>
-        <h1>Flashcard Learning</h1>
-        <select>
+    <div id="container">
+        
+        <div id="main">
+            <h1 id="header">Flashcard Learning</h1>
+        
+            <select id="categorySelect" class="form-select" aria-label="Default select example">
+                <option value="0">ALL Category</option>
+            </select>
 
-        </select>
-        <div>
-            <p>No Word available</p>
-        </div>
+            <div id="Flashcard">
+                <div id="card">
+                        <div id="front" class="card-content">
+                            <h2>Word</h2>
+                        </div>
+                        <div id="back" class="card-content">
+                            <h2>Example</h2>
+                        </div>
+                    </div>
 
-        <div>
-            <button>Previous</button>
-            <button>Mark as Learned</button>
-            <button>Next</button>
-        </div>
+                    <div id="action">
+                        <button id="previousButton" onclick="showPreviousWord(filteredVocabulary)">Previous</button>
+                        <button id="markAsLearnedButton" onclick="markAsLearned()">Mark as Learned</button>
+                        <button id="nextButton" onclick="showNextWord(filteredVocabulary)">Next</button>
+                    </div>
+                    
+                    <div id="progress">
+                        <div id="progress-text-container">
+                            <p>Progress</p>
+                            <p id="progress-text">0/00</p> <!-- Hiển thị số từ đã học -->
+                        </div>
 
-        <div>
-            <p>Progress</p>
-            
+                        <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
+                    </div>
+
+            <div>
+                <h1 id="header">Word List</h1>
+                <div id="table">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Word</th>
+                                <th scope="col">Meaning</th>
+                                <th scope="col">Example</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data">
+                            <!-- Data will be populated here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 
-
+    <footer>
+        <p>© 2024 VocabApp. All rights reserved.</p>
+    </footer>
     <script src="/home/main.js"></script>
     <script src="main.js"></script>
 </body>
