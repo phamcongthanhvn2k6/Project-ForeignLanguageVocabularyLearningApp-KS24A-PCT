@@ -67,7 +67,7 @@ function filterVocabularyByCategory() {
     learnedWords = [];
 
     // Cập nhật thanh tiến độ
-    updateProgressBar();
+    updateProgressBar(filteredVocabulary);
 
     // Hiển thị từ đầu tiên trong danh sách đã lọc
     currentIndex = 0;
@@ -76,19 +76,31 @@ function filterVocabularyByCategory() {
 }
 
 function renderData(danhSach = vocabularyList) {
-    const vocabularyData = document.querySelector('#data');
+    const vocabularyData = document.querySelector("#data");
     let dataHTML = "";
-    for (let i = 0; i < danhSach.length; i++) {
+
+    for (let index = 0; index < danhSach.length; index++) {
+        const word = danhSach[index];
+        const isLearned = learnedWords.includes(index); // Kiểm tra trạng thái học
+
         dataHTML += `
         <tr>
-            <td>${danhSach[i].word}</td>
-            <td>${danhSach[i].meaning}</td>
-            <td>${danhSach[i].categorySelect}</td>
+            <td>${word.word}</td>
+            <td>${word.meaning}</td>
+            <td>${word.categorySelect}</td>
+            <td class="${isLearned ? "text-success" : "text-danger"}">
+                ${isLearned ? "Learned" : "Not Learned"}
+            </td>
+            <td>
+                <button class="btn btn-danger btn-sm" onclick="openDeleteModal(${index})">Delete</button>
+            </td>
         </tr>
         `;
     }
+
     vocabularyData.innerHTML = dataHTML;
 }
+
 let currentIndex = 0; // Chỉ số từ vựng hiện tại
 
 function renderFlashcard(danhSach = vocabularyList) {
@@ -125,9 +137,8 @@ function showPreviousWord(danhSach = vocabularyList) {
     renderFlashcard(danhSach);
 }
 
-function updateProgressBar() {
-    const vocabularyList = JSON.parse(localStorage.getItem("vocabularyList")) || [];
-    const totalWords = vocabularyList.length;
+function updateProgressBar(danhSach = filteredVocabulary) {
+    const totalWords = danhSach.length;
 
     const progressPercentage = totalWords > 0 ? (learnedWords.length / totalWords) * 100 : 0;
 
@@ -141,8 +152,8 @@ function updateProgressBar() {
 }
 
 function markAsLearned() {
-    const vocabularyList = JSON.parse(localStorage.getItem("vocabularyList")) || [];
-    if (vocabularyList.length === 0) {
+    const danhSach = filteredVocabulary.length > 0 ? filteredVocabulary : vocabularyList;
+    if (danhSach.length === 0) {
         console.error("No words available.");
         return;
     }
@@ -152,8 +163,53 @@ function markAsLearned() {
         learnedWords.push(currentIndex); // Thêm chỉ số từ hiện tại vào mảng learnedWords
     }
 
-    // Cập nhật thanh tiến độ
-    updateProgressBar();
+    // Cập nhật giao diện
+    updateProgressBar(danhSach);
+    renderData(danhSach);
+}
+
+function deleteWord() {
+    const danhSach = filteredVocabulary.length > 0 ? filteredVocabulary : vocabularyList;
+
+    if (wordToDeleteIndex !== null && wordToDeleteIndex >= 0 && wordToDeleteIndex < danhSach.length) {
+        // Xóa từ khỏi danh sách đã lọc
+        const deletedWord = danhSach.splice(wordToDeleteIndex, 1)[0]; // Lưu từ bị xóa để tìm trong danh sách gốc
+        console.log(`Deleted word at index ${wordToDeleteIndex}`);
+        wordToDeleteIndex = null; // Reset chỉ số từ cần xóa
+
+        // Xóa từ khỏi danh sách gốc (vocabularyList)
+        const originalIndex = vocabularyList.findIndex(word => word.word === deletedWord.word);
+        if (originalIndex !== -1) {
+            vocabularyList.splice(originalIndex, 1);
+        }
+
+        // Lưu danh sách đã cập nhật vào localStorage
+        localStorage.setItem("vocabularyList", JSON.stringify(vocabularyList));
+
+        // Cập nhật giao diện
+        renderData(danhSach);
+        updateProgressBar(danhSach);
+
+        // Nếu từ bị xóa là từ hiện tại, cập nhật flashcard
+        if (currentIndex >= danhSach.length) {
+            currentIndex = 0; // Reset về từ đầu nếu vượt quá danh sách
+        }
+        hideDeleteModal();
+        renderFlashcard(danhSach);
+    }
+}
+
+function openDeleteModal(index) {
+    wordToDeleteIndex = index; // Lưu chỉ số từ cần xóa
+    const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
+    deleteModal.show();
+}
+
+function hideDeleteModal() {
+    const deleteModal = bootstrap.Modal.getInstance(document.getElementById("deleteModal"));
+    if (deleteModal) {
+        deleteModal.hide(); // Ẩn modal
+    }
 }
 
 

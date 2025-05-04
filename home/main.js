@@ -3,6 +3,15 @@ document.addEventListener("DOMContentLoaded", () => {
     renderHeaderAndBody();
 });
 
+function saveToLocalStorage(key, value) {
+    if (!key || value === undefined) {
+        console.error("Key hoặc value không hợp lệ!");
+        return;
+    }
+    localStorage.setItem(key, JSON.stringify(value));
+    console.log(`Dữ liệu đã được lưu vào localStorage với key: ${key}`);
+}
+
 function getFormData(formEL) {
     let data = {};
     for (element of formEL.elements) {
@@ -42,12 +51,12 @@ function renderHeaderAndBody() {
     const bodyDivEL = document.querySelector("#textCenter"); // Thẻ div trong body
 
     if (!userBoxEL) {
-        console.error("Phần tử #userBox không được tìm thấy!");
+        console.log("Phần tử #userBox không được tìm thấy!");
         return;
     }
 
     if (!bodyDivEL) {
-        console.error("Phần tử #textCenter không được tìm thấy!");
+        console.log("Phần tử #textCenter không được tìm thấy!");
         return;
     }
 
