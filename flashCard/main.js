@@ -140,7 +140,10 @@ function showPreviousWord(danhSach = vocabularyList) {
 function updateProgressBar(danhSach = filteredVocabulary) {
     const totalWords = danhSach.length;
 
-    const progressPercentage = totalWords > 0 ? (learnedWords.length / totalWords) * 100 : 0;
+    // Đảm bảo learnedWords không vượt quá số lượng từ hiện tại
+    const validLearnedWords = learnedWords.filter(index => index < totalWords);
+
+    const progressPercentage = totalWords > 0 ? (validLearnedWords.length / totalWords) * 100 : 0;
 
     const progressBar = document.querySelector("#progress-bar");
     progressBar.style.width = `${progressPercentage}%`; // Cập nhật chiều rộng thanh tiến độ
@@ -183,8 +186,18 @@ function deleteWord() {
             vocabularyList.splice(originalIndex, 1);
         }
 
+        // Cập nhật mảng learnedWords
+        learnedWords = learnedWords
+            .filter(index => index !== wordToDeleteIndex) // Loại bỏ chỉ số từ đã xóa
+            .map(index => (index > wordToDeleteIndex ? index - 1 : index)); // Điều chỉnh chỉ số còn lại
+
         // Lưu danh sách đã cập nhật vào localStorage
         localStorage.setItem("vocabularyList", JSON.stringify(vocabularyList));
+
+        // Cập nhật danh sách đã lọc (filteredVocabulary)
+        if (filteredVocabulary.length > 0) {
+            filteredVocabulary = danhSach;
+        }
 
         // Cập nhật giao diện
         renderData(danhSach);

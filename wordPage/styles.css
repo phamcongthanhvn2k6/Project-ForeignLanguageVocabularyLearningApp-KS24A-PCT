@@ -17,7 +17,7 @@ body {
     margin: 0;
     padding: 0;
     width: 100vw;
-    height: auto;
+    height: 100%;
     background-color: #d3d3d3c0;
     font-family: 'Roboto', sans-serif;
 }
@@ -36,12 +36,12 @@ footer {
 #textCenter {
     text-align: center;
     justify-content: center;
-    margin: auto;
+    margin: 50px auto;
     display: flex;
     flex-direction: column;
     width: 100%;
     max-width: 1200px;
-    height: auto;
+    height: 100%;
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
