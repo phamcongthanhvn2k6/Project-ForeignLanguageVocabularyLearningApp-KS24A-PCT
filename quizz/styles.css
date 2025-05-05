@@ -66,6 +66,16 @@ h1 {
     margin-top: 20px;
 }
 
+.correct {
+    border: 2px solid green;
+    border-radius: 5px;
+}
+
+.wrong {
+    border: 2px solid red;
+    border-radius: 5px;
+}
+
 #quizQuestion{
     font-size: 18px;
     text-align: center;
@@ -211,3 +221,4 @@ footer {
     color: #333;
     font-size: 14px;
 }
+

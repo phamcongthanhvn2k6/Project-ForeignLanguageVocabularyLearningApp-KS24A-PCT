@@ -23,11 +23,11 @@
                 </select>
             </div>
 
-            <div id="quizContainer">
+            <div id="quizContainer" hidden>
                 <div id="quizzProgress">
                     <div id="progress-text-container">
                         <p>Progress</p>
-                        <p id="progress-text">0/00</p> <!-- Hiển thị số từ đã học -->
+                        <p id="progress-text">0/00</p> <!-- Hiển thị số câu đã trả lời -->
                     </div>
                     <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
                 </div>
@@ -35,10 +35,10 @@
                 <div id="quizQuestionContainer">
                     <h2 id="quizQuestion">Question</h2>
                     <div id="quizOptions">
-                        <div class="option" onclick="selectOption(0)"><span id="option0">Option 1</span></div>
-                        <div class="option" onclick="selectOption(1)"><span id="option1">Option 2</span></div>
-                        <div class="option" onclick="selectOption(2)"><span id="option2">Option 3</span></div>
-                        <div class="option" onclick="selectOption(3)"><span id="option3">Option 4</span></div>
+                        <div class="option" onclick="selectOption(0, currentQuestionIndex, 'Option 1', correctAnswer)"><span id="option0">Option 1</span></div>
+                        <div class="option" onclick="selectOption(1, currentQuestionIndex, 'Option 2', correctAnswer)"><span id="option1">Option 2</span></div>
+                        <div class="option" onclick="selectOption(2, currentQuestionIndex, 'Option 3', correctAnswer)"><span id="option2">Option 3</span></div>
+                        <div class="option" onclick="selectOption(3, currentQuestionIndex, 'Option 4', correctAnswer)"><span id="option3">Option 4</span></div>
                     </div>
                 </div>
 
