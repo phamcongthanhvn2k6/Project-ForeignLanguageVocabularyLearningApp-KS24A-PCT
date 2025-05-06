@@ -1,7 +1,57 @@
-let vocabularyList = [];
-let categoriesList = [];
-let deleteIndex = -1;
+let vocabularyList = [
+    // Fruits
+    { word: "Apple", meaning: "Một loại trái cây ngọt và giòn", categorySelect: "Fruits" },
+    { word: "Banana", meaning: "Một loại trái cây dài, cong với vỏ màu vàng", categorySelect: "Fruits" },
+    { word: "Orange", meaning: "Một loại trái cây họ cam với vỏ cứng", categorySelect: "Fruits" },
 
+    // Animals
+    { word: "Dog", meaning: "Một loài động vật có vú ăn thịt được thuần hóa", categorySelect: "Animals" },
+    { word: "Cat", meaning: "Một loài động vật có vú ăn thịt nhỏ được thuần hóa", categorySelect: "Animals" },
+    { word: "Elephant", meaning: "Một loài động vật có vú lớn với vòi", categorySelect: "Animals" },
+
+    // Vehicles
+    { word: "Car", meaning: "Một phương tiện đường bộ có bốn bánh", categorySelect: "Vehicles" },
+    { word: "Bicycle", meaning: "Một phương tiện hai bánh chạy bằng cách đạp", categorySelect: "Vehicles" },
+    { word: "Airplane", meaning: "Một phương tiện bay có cánh chạy bằng động cơ", categorySelect: "Vehicles" },
+
+    // Colors
+    { word: "Red", meaning: "Màu của máu", categorySelect: "Colors" },
+    { word: "Blue", meaning: "Màu của bầu trời", categorySelect: "Colors" },
+    { word: "Green", meaning: "Màu của cỏ", categorySelect: "Colors" },
+
+    // Countries
+    { word: "Vietnam", meaning: "Một quốc gia ở Đông Nam Á", categorySelect: "Countries" },
+    { word: "France", meaning: "Một quốc gia ở Tây Âu", categorySelect: "Countries" },
+    { word: "Japan", meaning: "Một quốc gia đảo ở Đông Á", categorySelect: "Countries" },
+
+    // Sports
+    { word: "Soccer", meaning: "Một môn thể thao chơi bởi hai đội, mỗi đội 11 người", categorySelect: "Sports" },
+    { word: "Basketball", meaning: "Một môn thể thao chơi bởi hai đội, mỗi đội 5 người", categorySelect: "Sports" },
+    { word: "Tennis", meaning: "Một môn thể thao chơi bằng vợt và bóng", categorySelect: "Sports" },
+
+    // Technology
+    { word: "Computer", meaning: "Một thiết bị điện tử để lưu trữ và xử lý dữ liệu", categorySelect: "Technology" },
+    { word: "Smartphone", meaning: "Một chiếc điện thoại di động với các tính năng tiên tiến", categorySelect: "Technology" },
+    { word: "Internet", meaning: "Một mạng lưới toàn cầu kết nối hàng triệu mạng riêng", categorySelect: "Technology" },
+
+    // Music
+    { word: "Guitar", meaning: "Một nhạc cụ có dây", categorySelect: "Music" },
+    { word: "Piano", meaning: "Một nhạc cụ bàn phím lớn", categorySelect: "Music" },
+    { word: "Drum", meaning: "Một nhạc cụ gõ", categorySelect: "Music" },
+
+    // Movies
+    { word: "Action", meaning: "Một thể loại phim với các cảnh hành động hấp dẫn", categorySelect: "Movies" },
+    { word: "Comedy", meaning: "Một thể loại phim nhằm mục đích làm người xem cười", categorySelect: "Movies" },
+    { word: "Drama", meaning: "Một thể loại phim với cốt truyện nghiêm túc", categorySelect: "Movies" },
+
+    // Books
+    { word: "Novel", meaning: "Một câu chuyện hư cấu dài", categorySelect: "Books" },
+    { word: "Biography", meaning: "Một mô tả chi tiết về cuộc đời của ai đó", categorySelect: "Books" },
+    { word: "Dictionary", meaning: "Một cuốn sách liệt kê các từ và nghĩa của chúng", categorySelect: "Books" },
+];
+let deleteIndex = -1;
+let categoriesList = [];
+// Kiểm tra nếu chưa có dữ liệu trong localStorage
 if (!localStorage.getItem("categoriesList")) {
     categoriesList = ["Noun", "Verb", "Adjective"];
     localStorage.setItem("categoriesList", JSON.stringify(categoriesList));
@@ -10,9 +60,9 @@ if (!localStorage.getItem("categoriesList")) {
 }
 
 if (!localStorage.getItem("vocabularyList")) {
-    localStorage.setItem("vocabularyList", JSON.stringify(vocabularyList));
+    localStorage.setItem("vocabularyList", JSON.stringify(vocabularyList)); // Lưu từ vựng mẫu vào localStorage
 } else {
-    vocabularyList = JSON.parse(localStorage.getItem("vocabularyList"));
+    vocabularyList = JSON.parse(localStorage.getItem("vocabularyList")); // Lấy từ vựng từ localStorage
 }
 
 function SaveDataToLocal() {

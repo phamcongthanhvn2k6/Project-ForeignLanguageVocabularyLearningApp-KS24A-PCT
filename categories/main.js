@@ -1,11 +1,25 @@
-let categoriesList = [];
+let categoriesList = [
+    { name: "Fruits", description: "All about fruits" },
+    { name: "Animals", description: "All about animals" },
+    { name: "Vehicles", description: "All about vehicles" },
+    { name: "Colors", description: "All about colors" },
+    { name: "Countries", description: "All about countries" },
+    { name: "Sports", description: "All about sports" },
+    { name: "Technology", description: "All about technology" },
+    { name: "Music", description: "All about music" },
+    { name: "Movies", description: "All about movies" },
+    { name: "Books", description: "All about books" },
+];
+console.log(categoriesList);
 let currentPage = 1; // Trang hiện tại
 const itemsPerPage = 5; // Số mục trên mỗi trang
 
+
+// Kiểm tra nếu chưa có dữ liệu trong localStorage
 if (!localStorage.getItem("categoriesList")) {
-    localStorage.setItem("categoriesList", JSON.stringify(categoriesList));
+    localStorage.setItem("categoriesList", JSON.stringify(categoriesList)); // Lưu dữ liệu mẫu vào localStorage
 } else {
-    categoriesList = JSON.parse(localStorage.getItem("categoriesList"));
+    categoriesList = JSON.parse(localStorage.getItem("categoriesList")); // Lấy dữ liệu từ localStorage
 }
 
 function SaveDataToLocal() {
