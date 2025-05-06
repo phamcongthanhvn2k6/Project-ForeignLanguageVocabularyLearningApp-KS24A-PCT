@@ -151,7 +151,7 @@ function updateProgressBar(danhSach = filteredVocabulary) {
 
     // Cập nhật chỉ số từ đã học
     const progressText = document.querySelector("#progress-text");
-    progressText.textContent = `${learnedWords.length}/${totalWords}`; // Hiển thị số từ đã học so với tổng số từ
+    progressText.textContent = `${validLearnedWords.length}/${totalWords}`; // Hiển thị số từ đã học so với tổng số từ
 }
 
 function markAsLearned() {
@@ -201,7 +201,7 @@ function deleteWord() {
 
         // Cập nhật giao diện
         renderData(danhSach);
-        updateProgressBar(danhSach);
+        updateProgressBar(danhSach); // Gọi hàm cập nhật thanh tiến độ
 
         // Nếu từ bị xóa là từ hiện tại, cập nhật flashcard
         if (currentIndex >= danhSach.length) {

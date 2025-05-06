@@ -85,6 +85,8 @@ body {
 
 /* Mặt trước */
 #front {
+    justify-content: center;
+    align-items: center;
     display: flex;
     flex-direction: column;
     background-color: #007bff;
@@ -94,11 +96,21 @@ body {
 
 /* Mặt sau */
 #back {
+    justify-content: center;
+    align-items: center;
     display: flex;
     flex-direction: column;
     background-color: #6c757d;
     color: white;
     transform: rotateY(180deg); /* Mặt sau quay 180 độ */
+}
+
+#back h2 {
+    text-align: center;
+}
+
+#front h2 {
+    text-align: center;
 }
 
 /* Khi quay flashcard */

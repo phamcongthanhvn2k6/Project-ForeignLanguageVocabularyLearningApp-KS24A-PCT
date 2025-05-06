@@ -58,6 +58,16 @@ function renderQuestion(vocabularyList, currentQuestionIndex) {
         document.getElementById("quizQuestion").textContent = "Quiz Completed!";
         document.getElementById("quizOptions").innerHTML = ""; // Xóa các tùy chọn
         updateProgressBar(answeredQuestions, vocabularyList.length); // Cập nhật tiến độ khi hoàn thành
+
+        // Hiển thị nút để bắt đầu lại quiz
+        const restartButton = document.createElement("button");
+        restartButton.textContent = "Restart Quiz";
+        restartButton.onclick = () => {
+            document.getElementById("quizContainer").hidden = true;
+            startQuiz();
+        };
+        document.getElementById("quizOptions").appendChild(restartButton);
+
         return;
     }
 
@@ -82,15 +92,17 @@ function renderQuestion(vocabularyList, currentQuestionIndex) {
     }
 
     // Hiển thị các đáp án
-    for (let i = 0; i < 4; i++) {
-        const optionElement = document.getElementById(`option${i}`);
-        if (optionElement) {
-            optionElement.textContent = answers[i];
-            optionElement.parentElement.setAttribute(
-                "onclick",
-                `selectOption(${i}, ${currentQuestionIndex}, '${answers[i]}', '${currentWord.meaning}')`
-            );
-        }
+    const quizOptionsContainer = document.getElementById("quizOptions");
+    quizOptionsContainer.innerHTML = ""; // Xóa các đáp án cũ
+    for (let i = 0; i < answers.length; i++) {
+        const optionElement = document.createElement("div");
+        optionElement.className = "option";
+        optionElement.innerHTML = `<span id="option${i}">${answers[i]}</span>`;
+        optionElement.setAttribute(
+            "onclick",
+            `selectOption(${i}, ${currentQuestionIndex}, '${answers[i]}', '${currentWord.meaning}')`
+        );
+        quizOptionsContainer.appendChild(optionElement);
     }
 
     // Cập nhật thanh tiến độ
@@ -155,14 +167,16 @@ function selectOption(selectedIndex, currentQuestionIndex, selectedAnswer, corre
 
     // Kiểm tra đáp án và thêm viền màu
     if (selectedAnswer === correctAnswer) {
+        alert("Correct answer!"); // Thông báo đáp án đúng
         correctAnswers++; // Tăng số câu trả lời đúng
         selectedOption.classList.add("correct"); // Thêm lớp "correct" cho ô đáp án
     } else {
+        alert("Wrong answer!"); // Thông báo đáp án sai
+        selectedOption.classList.remove("correct"); // Xóa lớp "correct" nếu có
         selectedOption.classList.add("wrong"); // Thêm lớp "wrong" cho ô đáp án
     }
 
     // Chuyển sang câu hỏi tiếp theo sau một khoảng thời gian ngắn
-    setTimeout(() => {
         selectedOption.classList.remove("correct", "wrong"); // Xóa lớp màu
         currentQuestionIndex++;
         if (currentQuestionIndex < filteredVocabulary.length) {
@@ -175,7 +189,6 @@ function selectOption(selectedIndex, currentQuestionIndex, selectedAnswer, corre
             document.getElementById("quizOptions").innerHTML = ""; // Xóa các tùy chọn
             renderQuizHistory(JSON.parse(localStorage.getItem("quizHistory")));
         }
-    }, 500); // Thời gian chờ 500ms để hiển thị viền màu
 }
 
 function startQuiz() {
@@ -200,14 +213,15 @@ function startQuiz() {
         return;
     }
 
-    // Đặt lại số câu hỏi đã trả lời
+    // Đặt lại trạng thái
     answeredQuestions = 0;
+    currentQuestionIndex = 0;
+    correctAnswers = 0;
 
     // Hiển thị phần quiz
     document.getElementById("quizContainer").hidden = false;
 
     // Bắt đầu quiz với câu hỏi đầu tiên
-    currentQuestionIndex = 0;
     renderQuestion(filteredVocabulary, currentQuestionIndex);
 
     // Cập nhật thanh tiến độ ban đầu
