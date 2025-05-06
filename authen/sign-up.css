@@ -57,7 +57,7 @@ body{
     display: flex;
     flex-direction: column;
     width: 298px;
-    height: 634px;
+    height: auto;
     background-color: #ffffff; /* Nền hộp đăng nhập */
     border-radius: 8px; /* Góc bo tròn */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Bóng */

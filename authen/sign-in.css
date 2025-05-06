@@ -72,7 +72,7 @@ button#Register {
     display: flex;
     flex-direction: column;
     width: 298px;
-    height: 441px;
+    height: auto;
     background-color: #ffffff;
     /* Nền hộp đăng nhập */
     border-radius: 8px;

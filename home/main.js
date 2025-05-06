@@ -22,6 +22,10 @@ function getFormData(formEL) {
     return data;
 }
 
+function redirectToQuizPage(){
+    window.location.href = "/quizz/index.html";
+}
+
 // Chuyển hướng tới trang đăng nhập
 function redirectToFileSignIn() {
     window.location.href = "/authen/sign-in.html";
@@ -78,7 +82,7 @@ function renderHeaderAndBody() {
         <div id="contentCenter">
             <h1>Chào Mừng bạn đã quay lại học, ${firstName} ${lastName}!</h1>
             <p>Tiếp Tục học từ vụng và cải thiện kỹ năng của bạn ngày hôm nay.</p>
-            <button id="buttonQuiz">Làm Quiz</button>
+            <button onclick="redirectToQuizPage()" id="buttonQuiz">Làm Quiz</button>
         </div>
         `;
     } else {
